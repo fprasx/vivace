@@ -6,6 +6,7 @@ use std::{
 
 const RESET: &str = "\x1b[0m";
 const RED: &str = "\x1b[31m";
+const RED_BG: &str = "\x1b[0;101m";
 const GREEN: &str = "\x1b[32m";
 const YELLOW: &str = "\x1b[33m";
 
@@ -18,6 +19,9 @@ fn handle_line(writer: &mut impl Write, line: String) -> io::Result<()> {
         writeln!(writer, "{rest}")?;
     } else if let Some(rest) = line.strip_prefix("ERROR") {
         write!(writer, "{RED}ERROR{RESET}")?;
+        writeln!(writer, "{rest}")?;
+    } else if let Some(rest) = line.strip_prefix("CRITICAL WARNING") {
+        write!(writer, "{RED_BG}ERROR{RESET}")?;
         writeln!(writer, "{rest}")?;
     } else {
         writeln!(writer, "{line}")?;
