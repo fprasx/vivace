@@ -21,7 +21,7 @@ fn handle_line(writer: &mut impl Write, line: String) -> io::Result<()> {
         write!(writer, "{RED}ERROR{RESET}")?;
         writeln!(writer, "{rest}")?;
     } else if let Some(rest) = line.strip_prefix("CRITICAL WARNING") {
-        write!(writer, "{RED_BG}ERROR{RESET}")?;
+        write!(writer, "{RED_BG}CRITICAL WARNING{RESET}")?;
         writeln!(writer, "{rest}")?;
     } else {
         writeln!(writer, "{line}")?;
